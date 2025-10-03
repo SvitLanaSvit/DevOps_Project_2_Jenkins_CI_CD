@@ -183,7 +183,7 @@ http://192.168.56.10:8080
 5. **ID**: `worker-ssh-credentials`
 6. **Description**: `SSH credentials for worker node`
 
-![Node Configuration](screens/step_1_node_jenkins_worker_5.png)
+![Node Configuration](screens/step_1_node_jenkins_worker_credentials_5.png)
 
 
 ### 3.6 Перевірка підключення
