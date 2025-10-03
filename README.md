@@ -474,7 +474,6 @@ vagrant ssh jenkins -c "sudo docker exec jenkins ssh vagrant@192.168.56.11 'whoa
 
 ## 👨‍💻 Автор
 
-**Svitlana** - DevOps Engineer
 - GitHub: [@SvitLanaSvit](https://github.com/SvitLanaSvit)
 - Docker Hub: [svitlanakizilpinar](https://hub.docker.com/u/svitlanakizilpinar)
 
