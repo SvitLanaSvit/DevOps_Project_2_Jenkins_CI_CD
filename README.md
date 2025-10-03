@@ -423,7 +423,7 @@ Finished: SUCCESS
 
 ### 🐳 Docker Hub репозиторій:
 
-Ваші образи доступні за адресою:
+Образи доступні за адресою:
 ```
 docker pull your-username/jenkins-node-js:latest
 docker pull your-username/jenkins-node-js:8
