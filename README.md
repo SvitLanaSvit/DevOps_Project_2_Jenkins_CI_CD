@@ -113,22 +113,14 @@ vagrant ssh jenkins -c "sudo docker exec jenkins cat /var/jenkins_home/secrets/i
 http://192.168.56.10:8080
 ```
 
-![Jenkins Unlock Screen](screens/01-jenkins-unlock.png)
-
 ### 2.2 Розблокування Jenkins
 
 1. Введіть початковий пароль з попереднього кроку
 2. Натисніть **"Continue"**
 
-![Enter Password](screens/02-enter-password.png)
-
 ### 2.3 Встановлення плагінів
 
 Оберіть **"Install suggested plugins"**
-
-![Plugin Installation](screens/03-plugin-installation.png)
-
-**⏱️ Час встановлення:** 5-10 хвилин
 
 ### 2.4 Створення адміністратора
 
@@ -138,17 +130,9 @@ http://192.168.56.10:8080
 - **Full name**: ваше ім'я
 - **Email**: ваш email
 
-![Create Admin User](screens/04-create-admin.png)
-
 ### 2.5 Налаштування URL
 
 Залиште URL за замовчуванням: `http://192.168.56.10:8080`
-
-![Instance Configuration](screens/05-instance-config.png)
-
-### 2.6 Завершення налаштування
-
-![Jenkins Ready](screens/06-jenkins-ready.png)
 
 Тепер Jenkins готовий до роботи!
 
@@ -157,9 +141,9 @@ http://192.168.56.10:8080
 ### 3.1 Відкриття Manage Nodes
 
 1. Перейдіть до **"Manage Jenkins"**
-2. Оберіть **"Manage Nodes and Clouds"**
+2. Оберіть **"Nodes"**
 
-![Manage Nodes](screens/07-manage-nodes.png)
+![Nodes](screens/step_1_node_jenkins_worker_1.png)
 
 ### 3.2 Створення нового Node
 
@@ -167,7 +151,7 @@ http://192.168.56.10:8080
 2. Введіть назву: `worker-node`
 3. Оберіть **"Permanent Agent"**
 
-![New Node](screens/08-new-node.png)
+![New Node](screens/step_1_node_jenkins_worker_2.png)
 
 ### 3.3 Налаштування Worker Node
 
@@ -180,7 +164,7 @@ http://192.168.56.10:8080
 - **Usage**: `Use this node as much as possible`
 - **Launch method**: `Launch agents via SSH`
 
-![Node Configuration](screens/09-node-config.png)
+![Node Configuration](screens/step_1_node_jenkins_worker_3.png)
 
 ### 3.4 SSH налаштування
 
@@ -188,27 +172,25 @@ http://192.168.56.10:8080
 - **Credentials**: створіть нові (див. наступний крок)
 - **Host Key Verification Strategy**: `Non verifying Verification Strategy`
 
+![Node Configuration](screens/step_1_node_jenkins_worker_4.png)
+
 ### 3.5 Створення SSH Credentials
 
 1. Натисніть **"Add" → "Jenkins"**
-2. **Kind**: `SSH Username with private key`
+2. **Kind**: `Username with password`
 3. **Username**: `vagrant`
-4. **Private Key**: `Enter directly`
+4. **Password**: `*******`
+5. **ID**: `worker-ssh-credentials`
+6. **Description**: `SSH credentials for worker node`
 
-Отримайте приватний ключ:
-```bash
-vagrant ssh jenkins -c "sudo docker exec jenkins cat /var/jenkins_home/.ssh/id_rsa"
-```
+![Node Configuration](screens/step_1_node_jenkins_worker_5.png)
 
-Скопіюйте весь вивід (включаючи `-----BEGIN` та `-----END`)
-
-![SSH Credentials](screens/10-ssh-credentials.png)
 
 ### 3.6 Перевірка підключення
 
 Після збереження worker node повинен з'явитися зі статусом **"Online"**
 
-![Worker Online](screens/11-worker-online.png)
+![Node Configuration](screens/step_5_pipeline_1.png)
 
 ## 🐳 Крок 4: Налаштування Docker Hub
 
@@ -220,7 +202,10 @@ vagrant ssh jenkins -c "sudo docker exec jenkins cat /var/jenkins_home/.ssh/id_r
 4. **Access permissions**: `Read, Write, Delete`
 5. **Generate** і збережіть токен
 
-![Docker Hub Token](screens/12-dockerhub-token.png)
+![Docker Hub Token](screens/step_2_docker_hub_access_token_1.png)
+![Docker Hub Token](screens/step_2_docker_hub_access_token_2.png)
+![Docker Hub Token](screens/step_2_docker_hub_access_token_3.png)
+![Docker Hub Token](screens/step_2_docker_hub_access_token_4.png)
 
 ### 4.2 Додавання Docker Hub Credentials
 
@@ -231,7 +216,7 @@ vagrant ssh jenkins -c "sudo docker exec jenkins cat /var/jenkins_home/.ssh/id_r
 5. **Password**: згенерований токен
 6. **ID**: `dockerhub-credentials`
 
-![Docker Credentials](screens/13-docker-credentials.png)
+![Docker Credentials](screens/step_3_credential_Docker_Hub.png)
 
 ## 📝 Крок 5: Створення Pipeline
 
@@ -241,7 +226,9 @@ vagrant ssh jenkins -c "sudo docker exec jenkins cat /var/jenkins_home/.ssh/id_r
 2. **Name**: `nodejs-docker-pipeline`
 3. **Type**: `Pipeline`
 
-![New Pipeline](screens/14-new-pipeline.png)
+![New Pipeline](screens/step_4_job_create_1.png)
+![New Pipeline](screens/step_4_job_create_2.png)
+![New Pipeline](screens/step_4_job_create_3.png)
 
 ### 5.2 Налаштування Pipeline
 
@@ -325,7 +312,7 @@ pipeline {
 }
 ```
 
-![Pipeline Script](screens/15-pipeline-script.png)
+![Pipeline Script](screens/step_4_job_pipeline_code_4.png)
 
 **Не забудьте змінити `your-username` на ваш Docker Hub username!**
 
@@ -335,13 +322,11 @@ pipeline {
 
 Натисніть **"Build Now"**
 
-![Build Now](screens/16-build-now.png)
+![Build Now](screens/step_4_job_pipeline_start_5.png)
 
 ### 6.2 Моніторинг виконання
 
 Pipeline складається з 4 етапів:
-
-![Pipeline Stages](screens/17-pipeline-stages.png)
 
 1. **Checkout** - завантаження коду з GitHub
 2. **Build Docker Image** - збірка Docker образу
@@ -352,7 +337,7 @@ Pipeline складається з 4 етапів:
 
 Натисніть на будь-який етап для перегляду детальних логів:
 
-![Pipeline Logs](screens/18-pipeline-logs.png)
+![Pipeline Logs](screens/step_5_pipeline_2.png)
 
 ### 6.4 Успішний результат
 
@@ -414,7 +399,8 @@ Pipeline completed successfully!
 Finished: SUCCESS
 ```
 
-![Successful Build](screens/19-successful-build.png)
+![Successful Tests](screens/step_5_pipeline_tests_3.png)
+![Successful Build](screens/step_5_pipeline_success_4.png)
 
 ## 🎉 Результати
 
