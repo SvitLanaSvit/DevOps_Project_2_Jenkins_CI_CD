@@ -1,0 +1,84 @@
+Step Project 2
+Завдання
+
+1. Створити тестовий GitHub-репозиторій із Node.js-додатком forStep2.
+
+2. Створити тестовий акаунт у Docker Hub (безкоштовно).
+
+3. Використовуючи Vagrant, створити дві віртуальні машини:
+   - одну для сервера Jenkins,
+   - другу для Jenkins worker.
+
+4. Встановити Docker та запустити Jenkins на першій ВМ 
+   (або вручну, або через Vagrantfile).
+
+5. Встановити Docker і Jenkins worker безпосередньо на другій ВМ 
+   (без Docker-контейнера для Jenkins), вручну або через Vagrantfile.
+
+6. Підключити Jenkins worker до master-вузла. 
+   Перевірити, що можна запустити тестовий pipeline на Jenkins worker.
+
+7. Додати облікові дані (username/password) від Docker Hub 
+   у Jenkins Credentials.
+
+8. Створити тестовий pipeline на Groovy, який запускається вручну.
+   Pipeline повинен виконати:
+   - Завантаження коду з репозиторію.
+   - Збірку Docker-образу на Jenkins worker.
+   - Запуск Docker-образу з тестами.
+   - Якщо тести успішні → виконати логін у Docker Hub 
+     з Jenkins Credentials та запушити образ у Docker Hub.
+   - Якщо тести провалені → вивести повідомлення "Tests failed".
+
+До прочитання:
+- Створення акаунту в Docker Hub
+- Встановлення Jenkins
+- Документація Jenkins Pipeline
+- Документація Vagrant
+- Jenkins: Building a software project
+
+
+**********************
+
+Step Project 2
+Task
+Create a test GitHub repository with a Node.js app from forStep2.
+
+Create a test account in Docker Hub (free): Docker Hub
+
+Using Vagrant, create two VMs: one for the Jenkins server and the second for the Jenkins worker.
+
+Manually or in the Vagrant file, add installation of Docker and run Jenkins on the first VM.
+Manually or using the Vagrant file, add installation of Docker and Jenkins worker directly on the second VM (without Docker).
+Connect the Jenkins worker to the master node. Check that you can run a test pipeline on the Jenkins worker.
+
+Add credentials with your Docker Hub username and password to Jenkins credentials.
+
+Create a test pipeline using the Groovy language, which will start by running it manually. The pipeline must:
+
+Pull the code.
+Build the Docker image on the Jenkins worker.
+Run the Docker image with tests.
+If the tests are successful, log in to your Docker Hub account using Jenkins credentials from step 7 and push the built image to Docker Hub.
+If the tests fail, print the message "Tests failed".
+To Read
+Create a Docker Hub Account
+Installing Jenkins
+Jenkins Pipeline Documentation
+Vagrant Documentation
+Jenkins: Building a software project
+﻿
+
+Формат здачі:1. Код з Node.js app у вас в репозиторії
+
+2. Скрін вашого створеного акаунту на Docker Hub
+
+3. Код Vagrantfile або скріни встановлення Docker й Jenkins на першу віртуалку
+
+4. Так само для другої віртуалки, код або скріншоти.
+
+5. Скріншоти підключення Jenkins worker, додавання credentials вашого Docker Hub.
+
+6. Код пайплайну
+
+7. Скріни роботи пайплайну (покроково)
